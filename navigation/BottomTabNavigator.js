@@ -5,6 +5,7 @@ import OverLimitEntries from '../screens/OverLimitEntries';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PressableButton from '../components/PressableButton';
 import { AntDesign } from '@expo/vector-icons'; 
+import Color from '../components/Color';
 
 const Tab = createBottomTabNavigator();
 export default function BottomTabNavigator({route,navigation}) {
@@ -16,12 +17,12 @@ export default function BottomTabNavigator({route,navigation}) {
             // title: 'My profile',
             headerRight: () => {
                 return <PressableButton 
-                customizedStyle={{backgroundColor:'blueviolet'}}
+                customizedStyle={{backgroundColor: Color.headerTabColor}}
                 buttonPressed = {()=>navigation.navigate("AddEntries")}
                 pressedStyle={{
-                    backgroundColor:'blueviolet'
+                    backgroundColor: Color.headerTabColor
                 }}>
-                <AntDesign name = 'plus' size={20} color = "white"/>
+                <AntDesign name = 'plus' size={20} color = {Color.headerTintColor}/>
                 </PressableButton>
                 },
         });
@@ -30,8 +31,8 @@ export default function BottomTabNavigator({route,navigation}) {
     return (
         <Tab.Navigator screenOptions={({route})=>({
             headerShown:false,
-            tabBarActiveTintColor:'gold',
-            tabBarStyle:{backgroundColor:'blueviolet'},
+            tabBarActiveTintColor: Color.tabIconColor,
+            tabBarStyle:{backgroundColor:Color.headerTabColor},
             tabBarIcon: ({color,focused})=>{
                 var iconName;
                 if(route.name === "All Entries"){

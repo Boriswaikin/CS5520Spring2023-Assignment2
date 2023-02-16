@@ -3,6 +3,7 @@ import {NavigationContainer,getFocusedRouteNameFromRoute} from '@react-navigatio
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AddEntries from './screens/AddEntries';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+import Color from './components/Color';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,10 +26,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerStyle:{
-          backgroundColor:'blueviolet'
+          backgroundColor:Color.headerTabColor
         },
         headerBackTitle:'Back',
-        headerTintColor: 'white',
+        headerTintColor: Color.headerTintColor,
         headerTitleStyle:{
           fontSize:18
         }
@@ -44,13 +45,4 @@ export default function App() {
       </Stack.Navigator>                   
     </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+};

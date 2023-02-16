@@ -1,0 +1,29 @@
+import { View, TextInput } from "react-native";
+import React from "react";
+
+/**
+ * This is the textInput component that will be used by three screens
+ * @param inputStyle : the style of the textInput
+ * @param inputValue : the text value of the textInput
+ * @param inputChangeText : the changeText of the textInput
+ * @param textAlign : the text alignment of the textInput
+ * @returns the textInput configuration
+ */
+const InputComponent = ({
+  inputStyle,
+  inputValue,
+  inputChangeText,
+  inputAlign,
+}) => {
+  return (
+    <View>
+      <TextInput
+        style={inputStyle}
+        value={inputValue}
+        onChangeText={inputChangeText}
+        textAlign={inputAlign}
+      />
+    </View>
+  );
+};
+export default InputComponent;
