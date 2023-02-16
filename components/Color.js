@@ -7,7 +7,8 @@ const Color = {
     headerTintColor: "white",
     tabIconColor: "gold",
     // cardComponentColor: "lightgray",
-    textColor: "rebeccapurple", //Text color is rebeccapurple
+    textColor: "darkslateblue", //Text color is rebeccapurple
+    buttonColor:"blueviolet",
   };
   export default Color;
   
