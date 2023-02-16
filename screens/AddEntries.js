@@ -1,7 +1,8 @@
 import { View, StyleSheet,Button } from 'react-native'
-import React, {useEffect} from 'react'
+import React from 'react'
 
-export default function AllEntries({ navigation }) {
+
+export default function AddEntries() {
   return (
     <View style={styles.container}>
     </View>
@@ -10,7 +11,7 @@ export default function AllEntries({ navigation }) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'mediumpurple',
+      backgroundColor: 'green',
       alignItems: 'stretch',
       justifyContent: 'center',
     },

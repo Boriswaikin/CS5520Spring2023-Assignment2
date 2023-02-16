@@ -1,10 +1,24 @@
 import { StyleSheet, Text, View } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer,getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AddEntries from './screens/AddEntries';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
-import PressableButton from './components/PressableButton';
-import { AntDesign } from '@expo/vector-icons'; 
+
 const Stack = createNativeStackNavigator();
+
+function getHeaderTitle(route) {
+  // If the focused route is not found, we need to assume it's the initial screen
+  // This can happen during if there hasn't been any navigation inside the screen
+  // In our case, it's "Feed" as that's the first screen inside the navigator
+  const routeName = getFocusedRouteNameFromRoute(route)?? "All Entries";
+
+  switch (routeName) {
+    case 'All Entries':
+      return 'All Entries';
+    case 'Over Limit Entries':
+      return 'Over-limit Entries';
+  }
+}
 
 export default function App() {
   return (
@@ -20,20 +34,13 @@ export default function App() {
         }
         }}>
         <Stack.Screen 
-          name="BottomTabNavigator" 
-          component={BottomTabNavigator}
-          options={{
-          headerRight: ()=>{
-            return <PressableButton 
-            customizedStyle={{backgroundColor:'blueviolet'}}
-            buttonPressed={()=>console.log("iconpressed")}
-            pressedStyle={{
-                backgroundColor:'blueviolet'
-            }}>
-            <AntDesign name = 'plus' size={20} color = "white"/>
-            </PressableButton>
-            }}}
+          name="Home"
+          component={BottomTabNavigator} 
+          options={({ route }) => ({ title: getHeaderTitle(route) })}  
         />
+         <Stack.Screen name ="AddEntries" component={AddEntries}
+         options={{
+          title:"Add An Entry"}}/>
       </Stack.Navigator>                   
     </NavigationContainer>
   );
