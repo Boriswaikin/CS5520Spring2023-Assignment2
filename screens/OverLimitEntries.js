@@ -10,7 +10,7 @@ export default function OverLimitEntries() {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
-          backgroundColor: 'mediumpurple',
+          backgroundColor: 'red',
           alignItems: 'stretch',
           justifyContent: 'center',
         },

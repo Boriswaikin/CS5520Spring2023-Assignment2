@@ -1,9 +1,8 @@
-import { View, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, StyleSheet,Button } from 'react-native'
+import React, {useEffect} from 'react'
 
 
-
-export default function AllEntries({navigation}) {
+export default function AllEntries() {
   return (
     <View style={styles.container}>
     </View>
