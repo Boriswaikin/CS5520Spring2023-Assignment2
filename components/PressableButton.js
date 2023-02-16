@@ -22,9 +22,10 @@ export default function PressableButton(
 
 const styles = StyleSheet.create({
     pressableDefault: {
-        backgroundColor:'red'
+        height:35,
+        width:100,
+        borderRadius:4,
+        justifyContent:'center',
+        alignItems:'center',
     },
-    pressedStyle:{
-        backgroundColor:'pink'
-    }
 })
