@@ -18,10 +18,7 @@ export default function BottomTabNavigator({route,navigation}) {
             headerRight: () => {
                 return <PressableButton 
                 customizedStyle={{backgroundColor: Color.headerTabColor}}
-                buttonPressed = {()=>navigation.navigate("AddEntries")}
-                pressedStyle={{
-                    backgroundColor: Color.headerTabColor
-                }}>
+                buttonPressed = {()=>navigation.navigate("AddEntries")}>
                 <AntDesign name = 'plus' size={20} color = {Color.headerTintColor}/>
                 </PressableButton>
                 },

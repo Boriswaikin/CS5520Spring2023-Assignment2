@@ -1,4 +1,4 @@
-import { View, TextInput } from "react-native";
+import { View, TextInput,StyleSheet} from "react-native";
 import React from "react";
 
 /**
@@ -10,7 +10,7 @@ import React from "react";
  * @returns the textInput configuration
  */
 const InputComponent = ({
-  inputStyle,
+  inputHeight,
   inputValue,
   inputChangeText,
   inputAlign,
@@ -18,7 +18,8 @@ const InputComponent = ({
   return (
     <View>
       <TextInput
-        style={inputStyle}
+        multiline
+        style={[styles.input,{height:inputHeight}]}
         value={inputValue}
         onChangeText={inputChangeText}
         textAlign={inputAlign}
@@ -26,4 +27,14 @@ const InputComponent = ({
     </View>
   );
 };
+const styles = StyleSheet.create({
+  input:{
+    // position:'absolute',
+    marginTop: 10,
+    padding:5,
+    borderRadius:6,
+    width:210,
+    backgroundColor:'rgba(210, 230, 255,0.2)'
+  }
+})
 export default InputComponent;

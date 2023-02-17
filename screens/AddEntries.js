@@ -3,10 +3,10 @@ import React, {useState} from 'react'
 import Color from '../components/Color'
 import InputComponent from '../components/InputComponent';
 import PressableButton from '../components/PressableButton';
-import { AntDesign } from '@expo/vector-icons'; 
 export default function AddEntries() {
 
   const [inputCalories, setInputCalories] = useState();
+  const [inputDescription, setInputDescription] = useState();
 
   function setAlert(){
     if(isNaN(inputCalories)||inputCalories<0||inputCalories.length === 0){
@@ -15,8 +15,8 @@ export default function AddEntries() {
   }
 
   function resetInput() {
-    setAppCalories("");
-    setAppDescription("");
+    setInputCalories("");
+    setInputDescription("");
   }
 
   return (
@@ -33,6 +33,7 @@ export default function AddEntries() {
             Calories
         </Text>
         <InputComponent
+          inputHeight = {30}
           inputChangeText={setInputCalories}
           inputValue={inputCalories}
           inputAlign="left"
@@ -50,27 +51,32 @@ export default function AddEntries() {
         </Text>
         <InputComponent
           inputHeight = {100}
-          inputChangeText={setInputCalories}
-          inputValue={inputCalories}
+          inputChangeText={setInputDescription}
+          inputValue={inputDescription}
           inputAlign="left"
         />
       </View> 
       <View style={styles.fixToText}>
           <PressableButton
-            customizedStyle = {{backgroundColor: Color.buttonColor}}
+            customizedStyle = {{
+              backgroundColor: Color.buttonColor,
+              height:35,
+              width:100}}
             buttonPressed= {()=>{
-            console.log("Reset");
+              resetInput();
             }}
-            pressedStyle = {{backgroundColor: Color.buttonColor}}
           >
           <Text style={{color:'white'}}>Reset</Text>
           </PressableButton>
           <PressableButton
-            customizedStyle = {{backgroundColor: Color.buttonColor}}
+            customizedStyle = {{
+              backgroundColor: Color.buttonColor,
+              height:35,
+              width:100}}
             buttonPressed= {()=>{
             console.log("Reset");
+            setAlert();
             }}
-            pressedStyle = {{backgroundColor: Color.buttonColor}}
           >
           <Text style={{color:'white'}}>Submit</Text>
           </PressableButton>
@@ -82,6 +88,7 @@ export default function AddEntries() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      
       flexDirection:'column',
       backgroundColor: 'mediumpurple',
       alignItems: 'stretch',
@@ -91,11 +98,17 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     firstInput: {
+      marginLeft: 5,
+      marginRight: 30,
+      justifyContent: "space-between",
       flex: 1,
       backgroundColor: 'mediumpurple',
       flexDirection: 'row',
     },
     secondInput: {
+      marginLeft: 5,
+      marginRight:30,
+      justifyContent: "space-between",
       flex: 3,
       backgroundColor: 'mediumpurple',
       flexDirection: 'row',
