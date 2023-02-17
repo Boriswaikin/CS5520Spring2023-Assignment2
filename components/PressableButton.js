@@ -13,7 +13,8 @@ export default function PressableButton(
             return [
             styles.pressableDefault,
             customizedStyle,
-            pressed && pressedStyle]}}
+            pressed && styles.pressedStyle]}}
+            android_ripple={{Color:"red"}}
             onPress={buttonPressed}>
             {children}
         </Pressable>
@@ -22,10 +23,11 @@ export default function PressableButton(
 
 const styles = StyleSheet.create({
     pressableDefault: {
-        height:35,
-        width:100,
         borderRadius:4,
         justifyContent:'center',
         alignItems:'center',
     },
+    pressedStyle:{
+        backgroundColor:'rgba(210, 230, 255, 0.1)'
+    }
 })
