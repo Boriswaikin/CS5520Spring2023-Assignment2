@@ -19,7 +19,7 @@ export default function AddEntries({navigation}) {
       navigation.navigate('Home',{screen:'All Entries'})
   }
 
-  function OnTextEntereDB(){
+  function OnTextEnterDB(){
     const newEntries = {calories:inputCalories,description:inputDescription};
     writeToDB(newEntries);
   }
@@ -85,7 +85,7 @@ export default function AddEntries({navigation}) {
               width:100}}
             buttonPressed= {()=>{
                setAlert();
-               OnTextEntereDB();
+               OnTextEnterDB();
                navigate();
               }}
           >
