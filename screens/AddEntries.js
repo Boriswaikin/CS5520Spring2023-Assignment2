@@ -8,20 +8,33 @@ export default function AddEntries({navigation}) {
 
   const [inputCalories, setCalories] = useState();
   const [inputDescription, setDescription] = useState();
+  const [overlimit, setOverlimit] = useState(false);
   
-  
-  function setAlert(){
-    if(isNaN(inputCalories)||inputCalories<0||inputCalories.length === 0){
-      Alert.alert("Invalid input","Please check your input values");
-    }
+  function setInputCalories(text){
+    setCalories(text);
   }
+  
   function navigate(){
       navigation.navigate('Home',{screen:'All Entries'})
   }
 
   function OnTextEnterDB(){
-    const newEntries = {calories:inputCalories,description:inputDescription};
+    const newEntries = {
+      calories:inputCalories,
+      description:inputDescription,
+      flagOverlimit:overlimit
+      };
     writeToDB(newEntries);
+  }
+
+  function onEntriesPressed(){
+    if(isNaN(inputCalories)||inputCalories<0||inputCalories.length === 0){
+      Alert.alert("Invalid input","Please check your input values");
+    }
+    else {
+      OnTextEnterDB();
+      navigate();
+    }
   }
 
 
@@ -44,7 +57,10 @@ export default function AddEntries({navigation}) {
         </Text>
         <InputComponent
           inputHeight = {30}
-          inputChangeText={setCalories}
+          inputChangeText={(text)=>{
+            setInputCalories(text);
+            setOverlimit(parseFloat(text)>500);
+            }}
           inputValue={inputCalories}
           inputAlign="left"
         />
@@ -84,9 +100,7 @@ export default function AddEntries({navigation}) {
               height:35,
               width:100}}
             buttonPressed= {()=>{
-               setAlert();
-               OnTextEnterDB();
-               navigate();
+              onEntriesPressed();
               }}
           >
           <Text style={{color:'white'}}>Submit</Text>

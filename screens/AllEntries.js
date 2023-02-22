@@ -6,33 +6,32 @@ import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../Firebase/Firebase-setup';
 export default function AllEntries() {
 
-  const [entries,setEntries] = useState([]);
+  const [entriesAll,setEntriesAll] = useState([]);
 
   useEffect(()=>{
     onSnapshot(collection(db, "entries"),(querySnapshot) => {
       if (querySnapshot.empty){
-        setEntries([]);
+        setEntriesAll([]);
       }
       else {
         let entriesFromDB = [];
         querySnapshot.docs.forEach((doc)=>{
           entriesFromDB.push({...doc.data(),id:doc.id});
         })
-        setEntries(entriesFromDB)
+        setEntriesAll(entriesFromDB)
         // console.log(entriesFromDB)
       }
     });
-    // return ()=>{
-    //   unsubscribe();
-    // }
+    return ()=>{
+      unsubscribe();
+    }
     },[])
-
 
   // console.log(route.params.value);
   return (
     <View style={styles.container}>
       <EntriesList
-        inputData={entries}/>
+        inputData={entriesAll}/>
     </View>
   )
 }
