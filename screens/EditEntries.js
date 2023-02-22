@@ -1,8 +1,6 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
 
-
-
 export default function EditEntries({navigation}) {
   return (
     <View style={styles.container}>
