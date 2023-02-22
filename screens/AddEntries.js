@@ -1,24 +1,34 @@
 import { View, StyleSheet,Button ,Text,Alert} from 'react-native'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Color from '../components/Color'
 import InputComponent from '../components/InputComponent';
 import PressableButton from '../components/PressableButton';
-export default function AddEntries() {
+import { writeToDB } from '../Firebase/Firebase-helper';
+export default function AddEntries({navigation}) {
 
-  const [inputCalories, setInputCalories] = useState();
-  const [inputDescription, setInputDescription] = useState();
-
+  const [inputCalories, setCalories] = useState();
+  const [inputDescription, setDescription] = useState();
+  
+  
   function setAlert(){
     if(isNaN(inputCalories)||inputCalories<0||inputCalories.length === 0){
       Alert.alert("Invalid input","Please check your input values");
     }
   }
-
-  function resetInput() {
-    setInputCalories("");
-    setInputDescription("");
+  function navigate(){
+      navigation.navigate('Home',{screen:'All Entries'})
   }
 
+  function OnTextEntereDB(){
+    const newEntries = {calories:inputCalories,description:inputDescription};
+    writeToDB(newEntries);
+  }
+
+
+  function resetInput() {
+    setCalories("");
+    setDescription("");
+  }
   return (
     <View style={styles.container}>
       <View style={styles.content}/>
@@ -34,7 +44,7 @@ export default function AddEntries() {
         </Text>
         <InputComponent
           inputHeight = {30}
-          inputChangeText={setInputCalories}
+          inputChangeText={setCalories}
           inputValue={inputCalories}
           inputAlign="left"
         />
@@ -51,7 +61,7 @@ export default function AddEntries() {
         </Text>
         <InputComponent
           inputHeight = {100}
-          inputChangeText={setInputDescription}
+          inputChangeText={setDescription}
           inputValue={inputDescription}
           inputAlign="left"
         />
@@ -74,9 +84,10 @@ export default function AddEntries() {
               height:35,
               width:100}}
             buttonPressed= {()=>{
-            console.log("Reset");
-            setAlert();
-            }}
+               setAlert();
+               OnTextEntereDB();
+               navigate();
+              }}
           >
           <Text style={{color:'white'}}>Submit</Text>
           </PressableButton>
@@ -88,7 +99,6 @@ export default function AddEntries() {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      
       flexDirection:'column',
       backgroundColor: 'mediumpurple',
       alignItems: 'stretch',
