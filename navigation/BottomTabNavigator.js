@@ -1,3 +1,4 @@
+import { View} from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, {useEffect} from 'react';
 import AllEntries from '../screens/AllEntries';
@@ -14,20 +15,19 @@ export default function BottomTabNavigator({route,navigation}) {
         // Use `setOptions` to update the button that we previously specified
         // Now the button includes an `onPress` handler to update the count
         navigation.setOptions({
-            // title: 'My profile',
-            headerRight: () => {
-                return <PressableButton 
-                customizedStyle={{backgroundColor: Color.headerTabColor}}
-                buttonPressed = {()=>navigation.navigate("AddEntries")}>
-                <AntDesign name = 'plus' size={20} color = {Color.headerTintColor}/>
-                </PressableButton>
-                },
-        });
-      },[navigation]);
+            headerShown:false,
+      })});
 
     return (
         <Tab.Navigator screenOptions={({route})=>({
-            headerShown:false,
+            // headerShown:false,
+            headerStyle:{
+                backgroundColor:Color.headerTabColor
+              },
+            headerTintColor: Color.headerTintColor,
+            headerTitleStyle:{
+            fontSize:18
+            },
             tabBarActiveTintColor: Color.tabIconColor,
             tabBarStyle:{backgroundColor:Color.headerTabColor},
             tabBarIcon: ({color,focused})=>{
@@ -38,7 +38,16 @@ export default function BottomTabNavigator({route,navigation}) {
                 if(route.name === "Over Limit Entries"){
                     iconName = focused ? 'md-alert-sharp' : 'md-alert-outline'
                 }
-                return <Ionicons name={iconName} size={22} color={color}/>}
+                return <Ionicons name={iconName} size={22} color={color}/>},
+                headerRight: () => {
+                    return <View style={{marginRight:10}}><PressableButton 
+                    customizedStyle={
+                        {backgroundColor: Color.headerTabColor}}
+                    buttonPressed = {()=>navigation.navigate("AddEntries")}>
+                    <AntDesign name = 'plus' size={18} color = {Color.headerTintColor}/>
+                    </PressableButton>
+                    </View>
+                    },
             })}>
             <Tab.Screen 
                 name="All Entries" 
