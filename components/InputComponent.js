@@ -1,4 +1,4 @@
-import { View, TextInput,StyleSheet} from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import React from "react";
 
 /**
@@ -9,32 +9,27 @@ import React from "react";
  * @param textAlign : the text alignment of the textInput
  * @returns the textInput configuration
  */
-const InputComponent = ({
-  inputHeight,
-  inputValue,
-  inputChangeText,
-  inputAlign,
-}) => {
+const InputComponent = (props) => {
   return (
     <View>
       <TextInput
         multiline
-        style={[styles.input,{height:inputHeight}]}
-        value={inputValue}
-        onChangeText={inputChangeText}
-        textAlign={inputAlign}
+        style={[styles(props).input, { height: props.inputHeight }]}
+        value={props.inputValue}
+        onChangeText={props.inputChangeText}
+        textAlign={props.inputAlign}
       />
     </View>
   );
 };
-const styles = StyleSheet.create({
-  input:{
-    // position:'absolute',
-    marginTop: 10,
-    padding:5,
-    borderRadius:6,
-    width:210,
-    backgroundColor:'rgba(210, 230, 255,0.2)'
-  }
-})
+const styles = (props) =>
+  StyleSheet.create({
+    input: {
+      backgroundColor: props.backgroundColor,
+      width: props.width,
+      padding: props.padding,
+      borderRadius: props.radius,
+      marginTop: props.marginTop,
+    },
+  });
 export default InputComponent;
