@@ -1,70 +1,70 @@
-import { View, Text, StyleSheet} from 'react-native'
-import React from 'react'
-import PressableButton from './PressableButton';
-import Color from './Color';
-import { Ionicons } from '@expo/vector-icons'; 
+import { View, Text, StyleSheet, Platform } from "react-native";
+import React from "react";
+import PressableButton from "./PressableButton";
+import Color from "./Color";
+import { Ionicons } from "@expo/vector-icons";
+import CardComponent from "./CardComponent";
 
-export default function EntriesItem({entries,onEntriesPressed}) {
+export default function EntriesItem({ entries, editEntriesPressed }) {
   return (
     <View>
-      <PressableButton
-        customizedStyle = {styles.textContainer}
-        buttonPressed= {()=>{
-            console.log("happy");
-        }}
+      <CardComponent
+        flexDirection="row"
+        color={Color.headerTabColor}
+        width={300}
+        height={45}
+        radius={5}
+        marginBottom={15}
       >
-      <Text style={styles.textDescription}>{entries.description}</Text>   
-      <View style={styles.caloriesContainer}>
-      {entries.flagOverlimit && (
-          <Ionicons name = 'warning' size={18} color = "yellow"> 
-          </Ionicons>
-          )}
-          <View style={styles.caloriesTextContainer}>
-          <Text style={styles.textCalories}>{entries.calories}</Text>
-        </View>
-      </View>
-      </PressableButton>
+        <PressableButton
+          customizedStyle={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: 300,
+          }}
+          buttonPressed={() => {
+            editEntriesPressed();
+          }}
+        >
+          <Text style={styles.textDescription}>{entries.description}</Text>
+          <View style={styles.caloriesContainer}>
+            {entries.flagOverlimit && (
+              <Ionicons name="warning" size={18} color="yellow"></Ionicons>
+            )}
+            <CardComponent
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              color={Color.headerTintColor}
+              width={60}
+              height={25}
+              radius={3}
+              marginRight={10}
+            >
+              <Text style={styles.textCalories}>{entries.calories}</Text>
+            </CardComponent>
+          </View>
+        </PressableButton>
+      </CardComponent>
     </View>
-  )
+  );
 }
 const styles = StyleSheet.create({
+  textDescription: {
+    color: Color.headerTintColor,
+    paddingLeft: 10,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
 
-  textContainer : {
-    backgroundColor: Color.buttonColor,
-    height:45,
-    width:300,
-    flexDirection:"row",
-    justifyContent: "space-between",
-    alignItems:'center',
-    marginBottom:15,
-    borderRadius:5,
-    },
+  caloriesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
 
-    textDescription:{
-    color:'white',
-    paddingLeft:10,
-    fontSize:15,
-    fontWeight: 'bold',
-    },
-
-    caloriesContainer:{
-      flexDirection:"row",
-      alignItems:"center",
-    },
-
-    caloriesTextContainer:{
-      backgroundColor:'white',
-      height:25,
-      width:60,
-      borderRadius:3,
-      marginRight:10,
-      justifyContent:'center',
-      alignItems:'center',
-    },
-
-    textCalories: { 
-    color:'black',
-    fontSize:12,
-    // fontWeight: 'bold',
-    },
-})
+  textCalories: {
+    color: Color.textCalories,
+    fontSize: 12,
+  },
+});
