@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Color from "../components/Color";
 import EntriesList from "../components/EntriesList";
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, query } from "firebase/firestore";
 import { db } from "../Firebase/Firebase-setup";
 
 /**
@@ -13,7 +13,7 @@ import { db } from "../Firebase/Firebase-setup";
  * @returns AllEntries screen display
  */
 export default function AllEntries({ navigation }) {
-  const [entriesAll, setEntriesAll] = useState([]);
+  const q = query(collection(db, "entries"));
 
   /**
    * Function to navigate to EditEntries screen
@@ -23,33 +23,9 @@ export default function AllEntries({ navigation }) {
     navigation.navigate("EditEntries", { entriesItem: entries });
   }
 
-  /**
-   * Get real time update from firestore
-   * push the data from firestore to an array - entriesAll
-   */
-  useEffect(() => {
-    const unsubscribe = onSnapshot(
-      query(collection(db, "entries")),
-      (querySnapshot) => {
-        if (querySnapshot.empty) {
-          setEntriesAll([]);
-        } else {
-          let entriesFromDB = [];
-          querySnapshot.docs.forEach((doc) => {
-            entriesFromDB.push({ ...doc.data(), id: doc.id });
-          });
-          setEntriesAll(entriesFromDB);
-        }
-      }
-    );
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
   return (
     <View style={styles.container}>
-      <EntriesList inputData={entriesAll} EntriesPressed={navigate} />
+      <EntriesList query={q} EntriesPressed={navigate} />
     </View>
   );
 }

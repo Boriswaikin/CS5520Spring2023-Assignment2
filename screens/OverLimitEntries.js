@@ -1,12 +1,11 @@
 import { View, StyleSheet } from "react-native";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Color from "../components/Color";
 import EntriesList from "../components/EntriesList";
 import {
   collection,
   query,
   where,
-  onSnapshot,
 } from "firebase/firestore";
 import { db } from "../Firebase/Firebase-setup";
 
@@ -19,7 +18,13 @@ import { db } from "../Firebase/Firebase-setup";
  * @returns the OverLimitEntries screen display
  */
 export default function OverLimitEntries({ navigation }) {
-  const [entriesOverlimit, setEntriesOverlimit] = useState([]);
+  // const [entriesOverlimit, setEntriesOverlimit] = useState([]);
+
+  const q = query(
+    collection(db, "entries"),
+    where("flagOverlimit", "==", true),
+    where("reviewedStatus", "==", false)
+  );
 
   /**
    * Navigate to EditEntries screen
@@ -29,36 +34,9 @@ export default function OverLimitEntries({ navigation }) {
     navigation.navigate("EditEntries", { entriesItem: entries });
   }
 
-  /**
-   * Get real time update from firestore
-   * push the data from firestore to an array - entriesAll
-   */
-  const collectionRef = collection(db, "entries");
-  const q = query(
-    collectionRef,
-    where("flagOverlimit", "==", true),
-    where("reviewedStatus", "==", false)
-  );
-  useEffect(() => {
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      if (querySnapshot.empty) {
-        setEntriesOverlimit([]);
-      } else {
-        let entriesFromDB = [];
-        querySnapshot.docs.forEach((doc) => {
-          entriesFromDB.push({ ...doc.data(), id: doc.id });
-        });
-        setEntriesOverlimit(entriesFromDB);
-      }
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
   return (
     <View style={styles.container}>
-      <EntriesList inputData={entriesOverlimit} EntriesPressed={navigate} />
+      <EntriesList query={q} EntriesPressed={navigate} />
     </View>
   );
 }
