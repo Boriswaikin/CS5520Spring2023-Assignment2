@@ -6,6 +6,12 @@ import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import Color from "./components/Color";
 
 const Stack = createNativeStackNavigator();
+
+/**
+ * This is main app set up which consists of the navigation of the screens
+ * It also sets up the header tab display of AllEntries and OverLimitEntries screen
+ * @returns the navigation between screens
+ */
 export default function App() {
   return (
     <NavigationContainer>
@@ -18,6 +24,7 @@ export default function App() {
           headerTitleStyle: {
             fontSize: 18,
           },
+          headerTitleAlign: "center",
         }}
       >
         <Stack.Screen name="Home" component={BottomTabNavigator} />

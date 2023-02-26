@@ -4,17 +4,33 @@ import Color from "../components/Color";
 import InputComponent from "../components/InputComponent";
 import PressableButton from "../components/PressableButton";
 import { writeToDB } from "../Firebase/Firebase-helper";
+
+/**
+ * This is the AddEntries screen setup.
+ * It shows two text(calories; description)
+ * and the two textinput(for user to input calories and description)
+ * and two buttons(Reset and Sign up). Reset button allows user to clear all the input;
+ * submit button allows user to write the entries data to firestore and navigate to AllEntries screen
+ * @param navigation: navigation prop
+ * @returns AddEntries screen display
+ */
 export default function AddEntries({ navigation }) {
-  const [inputCalories, setCalories] = useState();
+  const [inputCalories, setCalories] = useState("");
   const [inputDescription, setDescription] = useState("");
   const [overlimit, setOverlimit] = useState(false);
   const reviewed = false;
   const [caloriesLimit, setCaloriesLimit] = useState(500);
 
+  /**
+   * Function to navigate the all entries screen
+   */
   function navigate() {
     navigation.navigate("Home", { screen: "All Entries" });
   }
 
+  /**
+   * Function to write the entries to firestore
+   */
   function OnTextEnterDB() {
     const newEntries = {
       calories: inputCalories,
@@ -25,8 +41,18 @@ export default function AddEntries({ navigation }) {
     writeToDB(newEntries);
   }
 
+  /**
+   * Function to check if the input is valid; if not, then alert message will be pop out
+   * if the input is valud, then the entries will be written to firestore
+   * and navigate to all entries screen
+   */
   function onEntriesPressed() {
-    if (isNaN(inputCalories) || inputCalories < 0 || !inputDescription.trim()) {
+    if (
+      !inputCalories.trim() ||
+      isNaN(inputCalories) ||
+      inputCalories < 0 ||
+      !inputDescription.trim()
+    ) {
       Alert.alert("Invalid input", "Please check your input values");
     } else {
       OnTextEnterDB();
@@ -34,13 +60,15 @@ export default function AddEntries({ navigation }) {
     }
   }
 
+  /**
+   * Function to reset the calories and description input
+   */
   function resetInput() {
     setCalories("");
     setDescription("");
   }
   return (
     <View style={styles.container}>
-      <View style={styles.content} />
       <View style={styles.firstInput}>
         <Text
           style={{
@@ -64,7 +92,7 @@ export default function AddEntries({ navigation }) {
           width={210}
           padding={5}
           radius={6}
-          marginTop={10}
+          marginTop={12}
         />
       </View>
       <View style={styles.secondInput}>
@@ -87,7 +115,7 @@ export default function AddEntries({ navigation }) {
           width={210}
           padding={5}
           radius={6}
-          marginTop={10}
+          marginTop={12}
         />
       </View>
       <View style={styles.fixToText}>
@@ -116,7 +144,6 @@ export default function AddEntries({ navigation }) {
           <Text style={{ color: "white" }}>Submit</Text>
         </PressableButton>
       </View>
-      <View style={styles.emptyContent} />
     </View>
   );
 }
@@ -125,35 +152,29 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: Color.contentColor,
-    justifyContent: "center",
-  },
-  content: {
-    flex: 1,
+    justifyContent: "flex-start",
   },
   firstInput: {
-    flex: 1,
+    marginTop: 40,
     marginLeft: 5,
     marginRight: 30,
+    marginBottom: 10,
     justifyContent: "space-between",
     backgroundColor: Color.contentColor,
     flexDirection: "row",
   },
   secondInput: {
-    flex: 3,
     marginLeft: 5,
     marginRight: 30,
+    marginBottom: 30,
     justifyContent: "space-between",
     backgroundColor: Color.contentColor,
     flexDirection: "row",
   },
   fixToText: {
-    flex: 1,
     marginLeft: 80,
     marginRight: 80,
     justifyContent: "space-between",
     flexDirection: "row",
-  },
-  emptyContent: {
-    flex: 7,
   },
 });

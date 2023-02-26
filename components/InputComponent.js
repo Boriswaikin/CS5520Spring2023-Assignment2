@@ -2,11 +2,16 @@ import { View, TextInput, StyleSheet } from "react-native";
 import React from "react";
 
 /**
- * This is the textInput component that will be used by three screens
- * @param inputStyle : the style of the textInput
- * @param inputValue : the text value of the textInput
- * @param inputChangeText : the changeText of the textInput
- * @param textAlign : the text alignment of the textInput
+ * This is the textInput component that will be used by AddEntries screens
+ * @param props.inputHeight : the alternate height of the textInput
+ * @param props.inputValue : the text value of the textInput
+ * @param props.inputChangeText : the changeText of the textInput
+ * @param props.textAlign : the text alignment of the textInput
+ * @param props.backgroundColor : the background color of the textInput
+ * @param props.width : the width of the textInput
+ * @param props.padding : the padding of the textInput
+ * @param props.radius : the border radius of the textInput
+ * @param props.marginTop : the marginTop of the textInput
  * @returns the textInput configuration
  */
 const InputComponent = (props) => {

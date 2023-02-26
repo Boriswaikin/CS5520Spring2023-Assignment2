@@ -1,7 +1,15 @@
 //Type rnfe
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import React from "react";
 import Color from "./Color";
+
+/**
+ * This is the pressable button component that will be reused
+ * @param buttonPressed : title of the button
+ * @param customizedStyle : the customized style for the button
+ * @param children : the children component that can be wrapped up
+ * @returns the button configuration
+ */
 
 export default function PressableButton({
   buttonPressed,
@@ -17,8 +25,9 @@ export default function PressableButton({
           pressed && styles.pressedStyle,
         ];
       }}
-      android_ripple={{ Color: Color.rippleEffect }}
+      android_ripple={{ color: Color.rippleEffect }}
       onPress={buttonPressed}
+      hitSlop={15}
     >
       {children}
     </Pressable>

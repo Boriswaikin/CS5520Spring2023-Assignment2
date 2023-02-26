@@ -7,6 +7,10 @@ import {
 } from "firebase/firestore";
 import { db } from "./Firebase-setup";
 
+/**
+ * This is the function to add item to firestore
+ * @param data: the data that will be written to firestore
+ */
 export async function writeToDB(data) {
   // Add a new document with a generated id.
   //replace db with the firestore variable exported in firebase-setup
@@ -18,6 +22,10 @@ export async function writeToDB(data) {
   }
 }
 
+/**
+ * This is the function to delete the item from firestore
+ * @param data: the id of data that will be referenced for deletion
+ */
 export async function deletefromDB(deleteId) {
   try {
     await deleteDoc(doc(db, "entries", deleteId));
@@ -25,6 +33,12 @@ export async function deletefromDB(deleteId) {
     console.log("error");
   }
 }
+
+/**
+ * This is the function to update the item from firestore
+ * @param id: the id of data that will be referenced for update
+ * @param status: the status input for the field
+ */
 
 export async function updateDB(id, status) {
   try {

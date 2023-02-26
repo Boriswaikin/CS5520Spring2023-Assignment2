@@ -8,7 +8,7 @@ const Color = {
   tabIconColor: "gold",
   textCalories: "black",
   transparent: "#B1AFFF",
-  rippleEffect: "red",
+  rippleEffect: "#B1AFFF",
   buttonEffect: "rgba(210, 230, 255, 0.1)",
 };
 export default Color;

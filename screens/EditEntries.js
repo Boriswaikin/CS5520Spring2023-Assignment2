@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, Alert } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import Color from "../components/Color";
 import PressableButton from "../components/PressableButton";
 import { Feather } from "@expo/vector-icons";
@@ -8,17 +8,35 @@ import { deletefromDB } from "../Firebase/Firebase-helper";
 import { updateDB } from "../Firebase/Firebase-helper";
 import CardComponent from "../components/CardComponent";
 
+/**
+ * This is the EditEntries screen setup.
+ * It includes a card component to show the details of the entries item
+ * The details of the entries item:
+ * Calories; description; button to delete the item ;
+ * When clicking delete/review button, alert will be shown to the user to confirm their action
+ * @param route: the route prop
+ * @param navigation: the navigation prop
+ * @returns the EditEntries screen display
+ */
 export default function EditEntries({ route, navigation }) {
   const entriesItem = route.params.entriesItem;
 
+  /**
+   * Function to delete the item from the firestore
+   * After deleting the item, go back to the screen the user start from
+   */
   function onDeletePressed() {
     deletefromDB(entriesItem.id);
     navigation.goBack();
   }
 
+  /**
+   * Function to update the item from firestore (mark the item as reviewed)
+   * After updating the item, go back to the screen the user start from
+   */
   function onReviewPressed() {
     updateDB(entriesItem.id, true);
-    navigation.navigate("Home", { screen: "Over Limit Entries" });
+    navigation.goBack();
   }
 
   return (
@@ -61,7 +79,7 @@ export default function EditEntries({ route, navigation }) {
           >
             <Feather name="trash" size={14} color="white" />
           </PressableButton>
-          {entriesItem.flagOverlimit && (
+          {entriesItem.flagOverlimit && !entriesItem.reviewedStatus && (
             <PressableButton
               customizedStyle={styles.deleteButton}
               buttonPressed={() => {

@@ -9,7 +9,14 @@ import { AntDesign } from "@expo/vector-icons";
 import Color from "../components/Color";
 
 const Tab = createBottomTabNavigator();
-export default function BottomTabNavigator({ route, navigation }) {
+
+/**
+ * This is the nested navigator to include the all entries screen and over-limit entries screen
+ * also setup the display of header tab , tab bar icon and the bottom tab of the screens
+ * @param navigation: the navigation prop
+ * @returns the display of all entries screen and over-limit screen
+ */
+export default function BottomTabNavigator({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -26,6 +33,7 @@ export default function BottomTabNavigator({ route, navigation }) {
         headerTitleStyle: {
           fontSize: 18,
         },
+        headerTitleAlign: "center",
         tabBarActiveTintColor: Color.tabIconColor,
         tabBarStyle: { backgroundColor: Color.headerTabColor },
         tabBarIcon: ({ color, focused }) => {
@@ -33,7 +41,7 @@ export default function BottomTabNavigator({ route, navigation }) {
           if (route.name === "All Entries") {
             iconName = focused ? "md-cafe" : "md-cafe-outline";
           }
-          if (route.name === "Over Limit Entries") {
+          if (route.name === "Over-limit Entries") {
             iconName = focused ? "md-alert-sharp" : "md-alert-outline";
           }
           return <Ionicons name={iconName} size={22} color={color} />;
@@ -47,7 +55,7 @@ export default function BottomTabNavigator({ route, navigation }) {
               >
                 <AntDesign
                   name="plus"
-                  size={18}
+                  size={24}
                   color={Color.headerTintColor}
                 />
               </PressableButton>
@@ -57,7 +65,7 @@ export default function BottomTabNavigator({ route, navigation }) {
       })}
     >
       <Tab.Screen name="All Entries" component={AllEntries} />
-      <Tab.Screen name="Over Limit Entries" component={OverLimitEntries} />
+      <Tab.Screen name="Over-limit Entries" component={OverLimitEntries} />
     </Tab.Navigator>
   );
 }

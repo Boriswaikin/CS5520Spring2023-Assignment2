@@ -1,9 +1,18 @@
-import { View, Text, StyleSheet, Platform } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import PressableButton from "./PressableButton";
 import Color from "./Color";
 import { Ionicons } from "@expo/vector-icons";
 import CardComponent from "./CardComponent";
+
+/**
+ * This is the EntriesItem that represents the items of the Entries Flatlist
+ * The items of the Entries Flatlist include the description; calories and the warning sign if the calories>500
+ * that will be used by AllEntries/OverLimitEntries screen
+ * @param entries: the items of the Entries Flatlist
+ * @param editEntriesPressed: the function called after pressing the entries
+ * @returns the items of the Entries Flatlist that will be displayed in the screens
+ */
 
 export default function EntriesItem({ entries, editEntriesPressed }) {
   return (
