@@ -2,11 +2,7 @@ import { View, StyleSheet } from "react-native";
 import React from "react";
 import Color from "../components/Color";
 import EntriesList from "../components/EntriesList";
-import {
-  collection,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, query, where } from "firebase/firestore";
 import { db } from "../Firebase/Firebase-setup";
 
 /**

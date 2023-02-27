@@ -10,5 +10,6 @@ const Color = {
   transparent: "#B1AFFF",
   rippleEffect: "#B1AFFF",
   buttonEffect: "rgba(210, 230, 255, 0.1)",
+  warningSign: "yellow",
 };
 export default Color;

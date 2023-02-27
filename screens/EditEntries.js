@@ -77,7 +77,7 @@ export default function EditEntries({ route, navigation }) {
               );
             }}
           >
-            <Feather name="trash" size={14} color="white" />
+            <Feather name="trash" size={14} color={Color.headerTintColor} />
           </PressableButton>
           {entriesItem.flagOverlimit && !entriesItem.reviewedStatus && (
             <PressableButton
@@ -99,7 +99,7 @@ export default function EditEntries({ route, navigation }) {
                 );
               }}
             >
-              <AntDesign name="check" size={14} color="white" />
+              <AntDesign name="check" size={14} color={Color.headerTintColor} />
             </PressableButton>
           )}
         </View>

@@ -129,7 +129,7 @@ export default function AddEntries({ navigation }) {
             resetInput();
           }}
         >
-          <Text style={{ color: "white" }}>Reset</Text>
+          <Text style={{ color: Color.headerTintColor }}>Reset</Text>
         </PressableButton>
         <PressableButton
           customizedStyle={{
@@ -141,7 +141,7 @@ export default function AddEntries({ navigation }) {
             onEntriesPressed();
           }}
         >
-          <Text style={{ color: "white" }}>Submit</Text>
+          <Text style={{ color: Color.headerTintColor }}>Submit</Text>
         </PressableButton>
       </View>
     </View>

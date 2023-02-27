@@ -39,7 +39,11 @@ export default function EntriesItem({ entries, editEntriesPressed }) {
           <Text style={styles.textDescription}>{entries.description}</Text>
           <View style={styles.caloriesContainer}>
             {entries.flagOverlimit && (
-              <Ionicons name="warning" size={18} color="yellow"></Ionicons>
+              <Ionicons
+                name="warning"
+                size={18}
+                color={Color.warningSign}
+              ></Ionicons>
             )}
             <CardComponent
               flexDirection="column"
