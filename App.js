@@ -1,20 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AddEntries from "./screens/AddEntries";
+import EditEntries from "./screens/EditEntries";
+import BottomTabNavigator from "./navigation/BottomTabNavigator";
+import Color from "./components/Color";
 
+const Stack = createNativeStackNavigator();
+
+/**
+ * This is main app set up which consists of the navigation of the screens
+ * It also sets up the header tab display of AllEntries and OverLimitEntries screen
+ * @returns the navigation between screens
+ */
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Color.headerTabColor,
+          },
+          headerTintColor: Color.headerTintColor,
+          headerTitleStyle: {
+            fontSize: 18,
+          },
+          headerTitleAlign: "center",
+        }}
+      >
+        <Stack.Screen name="Home" component={BottomTabNavigator} />
+        <Stack.Screen
+          name="AddEntries"
+          component={AddEntries}
+          options={{
+            title: "Add An Entry",
+          }}
+        />
+        <Stack.Screen
+          name="EditEntries"
+          component={EditEntries}
+          options={{
+            title: "Edit Entry",
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
